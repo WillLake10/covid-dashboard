@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Covid Dashboard</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:n,b,i,bi" media="all">
+
+  <script src="scripts/jquery.min.js" type="text/javascript"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="styles/main.css" type="text/css">
+  <script src="https://kit.fontawesome.com/9c8cd2ffe8.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/const.js"></script>
+
+</head>
+<body>
+
+<script src="scripts/vaccineToDateChart.js"></script>
+<script src="scripts/casesChart.js"></script>
+<script src="scripts/deathsChart.js"></script>
+
+<section id="Vaccines">
+  <div class="container pt-3 pb-3">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-12 col-md-6">
+        <div class="pagetitle">
+          Vaccine Progress
+        </div>
+        <div class="pagesubtitle">
+          First Dose
+        </div>
+      </div>
+      <div class="col-md-3">
+        <button type="button" onclick="changeColour()" class="button">Change Colour Scheme</button>
+      </div>
+    </div>
+
+    <div class="chart-title">Daily vaccine doses</div>
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="vaccineNumberToDay"></canvas>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-striped">
+          <tbody>
+          <tr>
+            <td>Number of people had 1st does:</td>
+            <th><span id="firstDose"></span></th>
+          </tr>
+          <tr>
+            <td>Percent of UK population had 1st does:</td>
+            <th><span id="percVac"></span>%</th>
+          </tr>
+          <tr>
+            <td>Percent of UK Adult population had 1st does:</td>
+            <th><span id="percAdultVac"></span>%</th>
+          </tr>
+          <tr>
+            <td>Current 7 day rate:</td>
+            <th><span id="currentSevenDay"></span></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chart-title">Projected vaccine doses for May</div>
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="projDateMay"></canvas>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-striped">
+          <tbody>
+          <tr>
+            <td>Target amount:</td>
+            <th>31,800,000</th>
+          </tr>
+          <tr>
+            <td>Current predictions for 1st vaccines by May:</td>
+            <th><span id="projVacMay"></span></th>
+          </tr>
+          <tr>
+            <td>Needed 7 day rate for target:</td>
+            <th><span id="neededAvgMay"></span></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="Cases">
+  <div class="container pt-3 pb-3">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-12 col-md-6">
+        <div class="pagetitle">
+          Cases
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-title">Cases by Age Group</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="ageCasesChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-title">Percent Change of Cases by Age Group</div>
+    <div class="chart-subtitle">(Past <span id="casesHowLongBack1"></span> days)</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="caseChange"></canvas>
+      </div>
+    </div>
+    <div class="chart-title">Percent Change of Cases by Large Age Group Bands</div>
+    <div class="chart-subtitle">(Past <span id="casesHowLongBack2"></span> days)</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="caseChangeBands"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="Deaths">
+  <div class="container pt-3 pb-3">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-12 col-md-6">
+        <div class="pagetitle">
+          Deaths
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-title">England Average Deaths by Age Group</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="ageDeathsChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-title">England Average Deaths Percent Change by Age Group</div>
+    <div class="chart-subtitle">(Past <span id="deathsHowLongBack1"></span> days)</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="ageDeathsChangeChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-title">England Average Deaths Percent Change by Large Age Group Bands</div>
+    <div class="chart-subtitle">(Past <span id="deathsHowLongBack2"></span> days)</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="ageDeathsChangeChartAge"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <p>Made by Will Lake<br>
+          v0.5<br>
+          <a href="changeList.html">Change list</a></p>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <p style="text-align: right">Data from: <a href="https://coronavirus.data.gov.uk/">https://coronavirus.data.gov.uk</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function changeColour() {
+    if (getCookie("colourSequence") === "0"){
+      setCookie("colourSequence", 1, 5)
+    } else {
+      setCookie("colourSequence", 0, 5)
+    }
+    location.reload();
+  }
+</script>
+
+</body>
+</html>
