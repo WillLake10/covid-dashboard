@@ -1,6 +1,6 @@
 const casesUrl = (
   'https://api.coronavirus.data.gov.uk/v1/data?' +
-  'filters=areaType=overview&' +
+  'filters=areaType=' + getCookie("areaType") + ';areaName=' + getCookie("areaName") + '&' +
   'structure={"date":"date","newCasesBySpecimenDateAgeDemographics":"newCasesBySpecimenDateAgeDemographics"}'
 );
 
@@ -13,16 +13,20 @@ $.ajax(caseSettings).done(
 
     document.getElementById("casesHowLongBack1").innerHTML = howLongBack.toString();
     document.getElementById("casesHowLongBack2").innerHTML = howLongBack.toString();
+    // document.getElementById("casesHowLongBack3").innerHTML = howLongBack.toString();
 
     const datesString = []
     let datesString2c = []
     let caseChangeBandDataset = []
     let casesChangeChartDataset = []
     let ageCasesChartDataset = []
+    let ageCasesRateChartDataset = []
     let caseChangeBands = [[], [], [], [], []]
 
     let avg = getBaseAvgArray()
     let daily = getBaseAgeGroupArray()
+    let rate = getBaseAgeGroupArray()
+    let ratef = getBaseAgeGroupArray()
     let caseChange = getBaseAgeGroupArray()
     let caseChangef = getBaseAgeGroupArray()
 
@@ -34,6 +38,7 @@ $.ajax(caseSettings).done(
           for (let k = 0; k < ageBrackets.length; k++) {
             if (data[i].newCasesBySpecimenDateAgeDemographics[j].age === ageBrackets[k]) {
               daily[k].push(data[i].newCasesBySpecimenDateAgeDemographics[j].cases)
+              rate[k].push(data[i].newCasesBySpecimenDateAgeDemographics[j].rollingRate)
             }
           }
         }
@@ -53,6 +58,12 @@ $.ajax(caseSettings).done(
     for (let i = caseChange[0].length - howLongBack; i < caseChange[0].length; i++) {
       for (let j = 0; j < caseChange.length; j++) {
         caseChangef[j].push(caseChange[j][i])
+      }
+    }
+
+    for (let i = rate[0].length - howLongBack; i < rate[0].length; i++) {
+      for (let j = 0; j < rate.length; j++) {
+        ratef[j].push(rate[j][i])
       }
     }
 
@@ -85,6 +96,14 @@ $.ajax(caseSettings).done(
           data: avg[i]
         }
       )
+      ageCasesRateChartDataset.push(
+        {
+          label: ageBracketsDisplay[i],
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          borderColor: chartColours[colourSequence][0][i],
+          data: ratef[i]
+        }
+      )
     }
 
     for (let i = 0; i < ageBracketsTwentys.length; i++) {
@@ -98,6 +117,8 @@ $.ajax(caseSettings).done(
       )
     }
 
+    console.log(rate)
+
     const ageCasesChart = new Chart(
       document.getElementById('ageCasesChart').getContext('2d'),
       {type: 'line', data: {labels: datesString, datasets: ageCasesChartDataset}}
@@ -110,6 +131,10 @@ $.ajax(caseSettings).done(
 
     const caseChangeBandsChart = new Chart(document.getElementById('caseChangeBands').getContext('2d'),
       {type: 'line', data: {labels: datesString2c, datasets: caseChangeBandDataset}}
+    );
+
+    const caseRateBandsChart = new Chart(document.getElementById('caseRate').getContext('2d'),
+      {type: 'line', data: {labels: datesString2c, datasets: ageCasesRateChartDataset}}
     );
   }
 );

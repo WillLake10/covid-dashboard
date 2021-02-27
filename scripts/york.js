@@ -1,7 +1,7 @@
 const deathsURL = (
   'https://api.coronavirus.data.gov.uk/v1/data?' +
-  'filters=areaType=nation;areaName=england&' +
-  'structure={"date":"date","newDeaths28DaysByDeathDateAgeDemographics":"newDeaths28DaysByDeathDateAgeDemographics"}'
+  'filters=areaType=ltla;areaName=York&' +
+  'structure={"date":"date","newCasesBySpecimenDateAgeDemographics":"newCasesBySpecimenDateAgeDemographics"}'
 );
 
 const deathsSettings = {"async": true, "crossDomain": true, "url": deathsURL, "method": "GET", "headers": {}};
@@ -28,6 +28,7 @@ $.ajax(deathsSettings).done(
     let thisData
 
     let dailyDeaths = getBaseAgeGroupArray()
+    let casesRate = getBaseAgeGroupArray()
     let avgDeaths = getBaseAvgArray()
 
     //Create the dates and case ages datasets
@@ -39,6 +40,7 @@ $.ajax(deathsSettings).done(
           for (let k = 0; k < ageBrackets.length; k++) {
             if (data[i].newDeaths28DaysByDeathDateAgeDemographics[j].age === ageBrackets[k]) {
               dailyDeaths[k].push(data[i].newDeaths28DaysByDeathDateAgeDemographics[j].deaths)
+              casesRate[k].push(data[i].newDeaths28DaysByDeathDateAgeDemographics[j].rollingRate)
             }
           }
         }
@@ -137,6 +139,11 @@ $.ajax(deathsSettings).done(
     )
 
     const deathsChangeAgeChart = new Chart(
+      document.getElementById('ageDeathsChangeChartAge').getContext('2d'),
+      {type: 'line', data: {labels: datesString2, datasets: deathsChangeLargeChartDataSet}}
+    )
+
+    const caseRateChart = new Chart(
       document.getElementById('ageDeathsChangeChartAge').getContext('2d'),
       {type: 'line', data: {labels: datesString2, datasets: deathsChangeLargeChartDataSet}}
     )

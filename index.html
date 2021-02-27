@@ -16,6 +16,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <script src="scripts/utils.js"></script>
   <script src="scripts/const.js"></script>
@@ -26,9 +27,10 @@
 <script src="scripts/vaccineToDateChart.js"></script>
 <script src="scripts/casesChart.js"></script>
 <script src="scripts/deathsChart.js"></script>
+<script src="scripts/york.js"></script>
 
-<section id="Vaccines">
-  <div class="container pt-3 pb-3">
+<div class="container pt-3 pb-3">
+  <section id="Vaccines">
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-12 col-md-6">
@@ -97,11 +99,21 @@
         </table>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="Cases">
-  <div class="container pt-3 pb-3">
+  <div class="w3-row pb-3">
+    <a href="javascript:void(0)" onclick="openLoc(event, 'England');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">England</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openLoc(event, 'York');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">York</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openLoc(event, 'Rugby');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Rugby</div>
+    </a>
+  </div>
+
+  <div id="England" class="w3-container city" style="display: block;">
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-12 col-md-6">
@@ -111,31 +123,32 @@
       </div>
     </div>
 
-    <div class="chart-title">Cases by Age Group</div>
+    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Cases by Age Group</div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="ageCasesChart"></canvas>
       </div>
     </div>
-    <div class="chart-title">Percent Change of Cases by Age Group</div>
+    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Percent Change of Cases by Age Group</div>
     <div class="chart-subtitle">(Past <span id="casesHowLongBack1"></span> days)</div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="caseChange"></canvas>
       </div>
     </div>
-    <div class="chart-title">Percent Change of Cases by Large Age Group Bands</div>
+    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Percent Change of Cases by Large Age Group Bands</div>
     <div class="chart-subtitle">(Past <span id="casesHowLongBack2"></span> days)</div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="caseChangeBands"></canvas>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="Deaths">
-  <div class="container pt-3 pb-3">
+    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Cases per 100,000 by Age Group</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="caseRate"></canvas>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-12 col-md-6">
@@ -166,10 +179,14 @@
       </div>
     </div>
   </div>
-</section>
+
+  <div id="York" class="w3-container city" style="display:none"></div>
+  <div id="Rugby" class="w3-container city" style="display:none"></div>
+</div>
 
 <footer class="site-footer">
-  <div class="container">
+
+  <div class="container pt-3 pb-3">
     <div class="row">
       <div class="col-sm-6 col-xs-12">
         <p>Made by Will Lake<br>
@@ -185,14 +202,47 @@
 </footer>
 
 <script>
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+  }
+  document.getElementById(getCookie("areaName")).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-border-red";
+  location.reload();
+
   function changeColour() {
-    if (getCookie("colourSequence") === "0"){
+    if (getCookie("colourSequence") === "0") {
       setCookie("colourSequence", 1, 5)
     } else {
       setCookie("colourSequence", 0, 5)
     }
     location.reload();
   }
+
+  function openLoc(evt, loc) {
+    if (loc === 'York') {
+      setCookie("areaName", "York", 5)
+      setCookie("areaType", "ltla", 5)
+    } else if (loc === "Rugby") {
+      setCookie("areaName", "Rugby", 5)
+      setCookie("areaType", "ltla", 5)
+    } else {
+      setCookie("areaName", "England", 5)
+      setCookie("areaType", "nation", 5)
+    }
+    var i, x, tablinks;
+    x = document.getElementsByClassName("city");
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+    }
+    document.getElementById(loc).style.display = "block";
+    evt.currentTarget.firstElementChild.className += " w3-border-red";
+    location.reload();
+  }
+
 </script>
 
 </body>

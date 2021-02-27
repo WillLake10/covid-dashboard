@@ -3,6 +3,10 @@ const howLongBack = 28
 if (document.cookie.indexOf('colourSequence=') === -1) {
   setCookie("colourSequence", 1, 5)
 }
+if (document.cookie.indexOf('areaName=') === -1) {
+  setCookie("areaName", "York", 5)
+  setCookie("areaType", "ltla", 5)
+}
 
 let colourSequence = getCookie("colourSequence")
 
