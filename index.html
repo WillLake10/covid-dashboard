@@ -21,6 +21,61 @@
   <script src="scripts/utils.js"></script>
   <script src="scripts/const.js"></script>
 
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+    }
+
+    .overlay {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0, 0.9);
+      overflow-x: hidden;
+      transition: 0.5s;
+    }
+
+    .overlay-content {
+      position: relative;
+      top: 25%;
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .overlay a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 36px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .overlay a:hover, .overlay a:focus {
+      color: #f1f1f1;
+    }
+
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      font-size: 60px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .overlay a {font-size: 20px}
+      .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -28,6 +83,16 @@
 <script src="scripts/casesChart.js"></script>
 <script src="scripts/deathsChart.js"></script>
 <script src="scripts/york.js"></script>
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a onclick="changeColour(0)">Greyscale</a><br>
+    <a onclick="changeColour(1)">Bold Colours</a><br>
+    <a onclick="changeColour(2)">Blue / Purple scheme</a>
+  </div>
+</div>
+
 
 <div class="container pt-3 pb-3">
   <section id="Vaccines">
@@ -42,7 +107,8 @@
         </div>
       </div>
       <div class="col-md-3">
-        <button type="button" onclick="changeColour()" class="button">Change Colour Scheme</button>
+        <!--        <button type="button" onclick="changeColour()" class="button">Change Colour Scheme</button>-->
+        <button type="button" style="font-size:30px;cursor:pointer" onclick="openNav()" class="button">Change Colour Scheme</button>
       </div>
     </div>
 
@@ -123,27 +189,39 @@
       </div>
     </div>
 
-    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Cases by Age Group</div>
+    <div class="chart-title">
+      <script>document.write(getCookie("areaName"))</script>
+      Cases by Age Group
+    </div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="ageCasesChart"></canvas>
       </div>
     </div>
-    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Percent Change of Cases by Age Group</div>
+    <div class="chart-title">
+      <script>document.write(getCookie("areaName"))</script>
+      Percent Change of Cases by Age Group
+    </div>
     <div class="chart-subtitle">(Past <span id="casesHowLongBack1"></span> days)</div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="caseChange"></canvas>
       </div>
     </div>
-    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Percent Change of Cases by Large Age Group Bands</div>
+    <div class="chart-title">
+      <script>document.write(getCookie("areaName"))</script>
+      Percent Change of Cases by Large Age Group Bands
+    </div>
     <div class="chart-subtitle">(Past <span id="casesHowLongBack2"></span> days)</div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="caseChangeBands"></canvas>
       </div>
     </div>
-    <div class="chart-title"><script>document.write(getCookie("areaName"))</script> Cases per 100,000 by Age Group</div>
+    <div class="chart-title">
+      <script>document.write(getCookie("areaName"))</script>
+      Cases per 100,000 by Age Group
+    </div>
     <div class="row">
       <div class="col-md-12">
         <canvas id="caseRate"></canvas>
@@ -190,7 +268,7 @@
     <div class="row">
       <div class="col-sm-6 col-xs-12">
         <p>Made by Will Lake<br>
-          v0.5<br>
+          v0.6<br>
           <a href="changeList.html">Change list</a></p>
       </div>
       <div class="col-sm-6 col-xs-12">
@@ -212,11 +290,13 @@
   evt.currentTarget.firstElementChild.className += " w3-border-red";
   location.reload();
 
-  function changeColour() {
-    if (getCookie("colourSequence") === "0") {
-      setCookie("colourSequence", 1, 5)
-    } else {
+  function changeColour(col) {
+    if (col === 0) {
       setCookie("colourSequence", 0, 5)
+    } else if (col === 2) {
+      setCookie("colourSequence", 2, 5)
+    } else {
+      setCookie("colourSequence", 1, 5)
     }
     location.reload();
   }
@@ -243,6 +323,13 @@
     location.reload();
   }
 
+    function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+  }
+
+    function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+  }
 </script>
 
 </body>
