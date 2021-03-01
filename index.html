@@ -82,7 +82,6 @@
 <script src="scripts/vaccineToDateChart.js"></script>
 <script src="scripts/casesChart.js"></script>
 <script src="scripts/deathsChart.js"></script>
-<script src="scripts/york.js"></script>
 
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -121,15 +120,15 @@
         <table class="table table-striped">
           <tbody>
           <tr>
-            <td>Number of people had 1st does:</td>
+            <td>Number of people had 1st dose:</td>
             <th><span id="firstDose"></span></th>
           </tr>
           <tr>
-            <td>Percent of UK population had 1st does:</td>
+            <td>Percent of UK population had 1st dose:</td>
             <th><span id="percVac"></span>%</th>
           </tr>
           <tr>
-            <td>Percent of UK Adult population had 1st does:</td>
+            <td>Percent of UK Adult population had 1st dose:</td>
             <th><span id="percAdultVac"></span>%</th>
           </tr>
           <tr>
@@ -208,6 +207,7 @@
         <canvas id="caseChange"></canvas>
       </div>
     </div>
+
     <div class="chart-title">
       <script>document.write(getCookie("areaName"))</script>
       Percent Change of Cases by Large Age Group Bands
@@ -218,6 +218,7 @@
         <canvas id="caseChangeBands"></canvas>
       </div>
     </div>
+
     <div class="chart-title">
       <script>document.write(getCookie("areaName"))</script>
       Cases per 100,000 by Age Group
@@ -227,6 +228,18 @@
         <canvas id="caseRate"></canvas>
       </div>
     </div>
+
+    <div class="chart-title">
+      <script>document.write(getCookie("areaName"))</script>
+      Cases Proportions by Age Group
+    </div>
+    <div class="chart-subtitle">(7 day average)</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="caseProportionChart"></canvas>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-12 col-md-6">
@@ -256,6 +269,13 @@
         <canvas id="ageDeathsChangeChartAge"></canvas>
       </div>
     </div>
+    <div class="chart-title">England Deaths Proportions by Age Group</div>
+    <div class="chart-subtitle">(7 day average)</div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="deathsProportionChart"></canvas>
+      </div>
+    </div>
   </div>
 
   <div id="York" class="w3-container city" style="display:none"></div>
@@ -268,7 +288,7 @@
     <div class="row">
       <div class="col-sm-6 col-xs-12">
         <p>Made by Will Lake<br>
-          v0.6<br>
+          v0.7<br>
           <a href="changeList.html">Change list</a></p>
       </div>
       <div class="col-sm-6 col-xs-12">

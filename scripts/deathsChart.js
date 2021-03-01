@@ -22,6 +22,9 @@ $.ajax(deathsSettings).done(
     let zeroToSixtyDeathsChangef = []
     let deathsChangeChartDataSet = []
     let deathsChangeLargeChartDataSet = []
+    let deathsProportionChartDataSet = []
+    let totalDeathsByDate = []
+    let deathsProportion = [[], [], [], [], [], [], [], []]
     let avgDeathsChangeLarge = [[], [], []]
     let avgDeathsChangef = [[], [], [], [], [], [], []]
     let avgDeathsChange = [[], [], [], [], [], [], []]
@@ -81,6 +84,32 @@ $.ajax(deathsSettings).done(
       avgDeathsChangeLarge[2].push((avgDeathsChangef[4][i] + avgDeathsChangef[5][i] + avgDeathsChangef[6][i]) / 3)
     }
 
+    for (let i = 0; i < avgDeaths[0].length; i++) {
+      let total = 0
+      for (let j = 0; j < avgDeaths.length; j++) {
+        total = total + avgDeaths[j][i]
+      }
+      totalDeathsByDate.push(total)
+    }
+
+    for (let i = 0; i < 8; i++) {
+      if (i === 0) {
+        for (let j = 0; j < avgDeaths[i].length; j++) {
+          let total = 0
+          for (let k = 0; k < 12; k++) {
+            total = total + avgDeaths[k][j]
+          }
+          deathsProportion[i].push((total / totalDeathsByDate[j]) * 100)
+        }
+      } else {
+        for (let j = 0; j < avgDeaths[i].length; j++) {
+          deathsProportion[i].push((avgDeaths[i + 11][j] / totalDeathsByDate[j]) * 100)
+        }
+      }
+    }
+
+    deathsProportion.reverse()
+
     for (let i = 0; i < 8; i++) {
       if (i === 0) {
         thisData = zeroToSixtyDeaths
@@ -108,6 +137,14 @@ $.ajax(deathsSettings).done(
           data: thisData
         }
       )
+      deathsProportionChartDataSet.push(
+        {
+          label: ageBracketsUpper[7 - i],
+          backgroundColor: chartColours[colourSequence][1][7 - i],
+          borderColor: '#000000',
+          data: deathsProportion[i]
+        }
+      )
     }
 
     for (let i = 0; i < 4; i++) {
@@ -129,6 +166,19 @@ $.ajax(deathsSettings).done(
     const deathsChart = new Chart(
       document.getElementById('ageDeathsChart').getContext('2d'),
       {type: 'line', data: {labels: datesString, datasets: deathsChartDataSet}}
+    )
+
+    const deathsProportionChart = new Chart(
+      document.getElementById('deathsProportionChart').getContext('2d'),
+      {
+        type: 'bar', data: {labels: datesString, datasets: deathsProportionChartDataSet},
+        options: {
+          scales: {
+            xAxes: [{stacked: true}],
+            yAxes: [{stacked: true, ticks: {beginAtZero: true, min: 0, max: 100}}]
+          }
+        }
+      }
     )
 
     const deathsChangeChart = new Chart(

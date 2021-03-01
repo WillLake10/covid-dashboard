@@ -21,7 +21,9 @@ $.ajax(caseSettings).done(
     let casesChangeChartDataset = []
     let ageCasesChartDataset = []
     let ageCasesRateChartDataset = []
+    let caseProportionChartDataSet = []
     let caseChangeBands = [[], [], [], [], []]
+    let totalCasesByDate = []
 
     let avg = getBaseAvgArray()
     let daily = getBaseAgeGroupArray()
@@ -79,6 +81,24 @@ $.ajax(caseSettings).done(
       caseChangeBands[4].push((caseChangef[16][i] + caseChangef[17][i] + caseChangef[18][i]) / 3)
     }
 
+    let caseProportion = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+
+    for (let i = 0; i < avg[0].length; i++) {
+      let total = 0
+      for (let j = 0; j < avg.length; j++) {
+        total = total + avg[j][i]
+      }
+      totalCasesByDate.push(total)
+    }
+
+    for (let i = 0; i < avg.length; i++) {
+      for (let j = 0; j < avg[0].length; j++) {
+        caseProportion[i].push((avg[i][j] / totalCasesByDate[j]) * 100)
+      }
+    }
+
+    caseProportion.reverse()
+
     for (let i = 0; i < ageBrackets.length; i++) {
       casesChangeChartDataset.push(
         {
@@ -104,6 +124,14 @@ $.ajax(caseSettings).done(
           data: ratef[i]
         }
       )
+      caseProportionChartDataSet.push(
+        {
+          label: ageBracketsDisplay[18-i],
+          backgroundColor: chartColours[colourSequence][0][18-i],
+          borderColor: '#000000',
+          data: caseProportion[i]
+        }
+      )
     }
 
     for (let i = 0; i < ageBracketsTwentys.length; i++) {
@@ -116,8 +144,6 @@ $.ajax(caseSettings).done(
         }
       )
     }
-
-    console.log(rate)
 
     const ageCasesChart = new Chart(
       document.getElementById('ageCasesChart').getContext('2d'),
@@ -136,5 +162,18 @@ $.ajax(caseSettings).done(
     const caseRateBandsChart = new Chart(document.getElementById('caseRate').getContext('2d'),
       {type: 'line', data: {labels: datesString2c, datasets: ageCasesRateChartDataset}}
     );
+
+    const caseProportionChart = new Chart(
+      document.getElementById('caseProportionChart').getContext('2d'),
+      {
+        type: 'bar', data: {labels: datesString, datasets: caseProportionChartDataSet},
+        options: {
+          scales: {
+            xAxes: [{stacked: true}],
+            yAxes: [{stacked: true, ticks: {beginAtZero: true, min: 0, max: 100}}]
+          }
+        }
+      }
+    )
   }
 );
