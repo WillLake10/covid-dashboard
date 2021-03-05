@@ -1,0 +1,455 @@
+/*
+Website: York Colleges Guild
+Type: CSS
+Name: Main Style Sheet
+Created: 19th April 2020
+Last modified: 20th April 2020
+Author: Will Lake
+ */
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --StLRed: #ae0001;
+  --StLGold: #eeba30;
+  --StLGoldPale: rgb(249, 231, 185);
+}
+
+.thumbnail {
+  position: relative;
+}
+
+.caption {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  width: 100%;
+}
+
+.pagetitle {
+  line-height: 45px;
+  font-family: Sitka Heading;
+  color: Black;
+  font-size: 35pt;
+  font-style: normal;
+  letter-spacing: 4px;
+  font-variant: small-caps;
+  text-align: center;
+  font-weight: normal
+}
+
+.pagesubtitle {
+  line-height: 45px;
+  font-family: Sitka Heading;
+  color: Black;
+  font-size: 20pt;
+  font-style: normal;
+  letter-spacing: 4px;
+  font-variant: small-caps;
+  text-align: center;
+  font-weight: normal
+}
+
+.chart-title {
+  line-height: 15px;
+  color: Black;
+  font-size: 15pt;
+  font-style: normal;
+  letter-spacing: 4px;
+  text-align: center;
+  font-weight: normal;
+  text-decoration: underline;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.chart-subtitle {
+  line-height: 10px;
+  color: Black;
+  font-size: 10pt;
+  font-style: normal;
+  letter-spacing: 4px;
+  text-align: center;
+  font-weight: normal;
+  padding-bottom: 20px;
+}
+
+.bg-ThemeColour {
+  background-color: var(--StLRed);
+}
+
+.text-ThemeColour {
+  color: var(--StLRed);
+}
+
+.pageDivide {
+  line-height: 5px;
+  font-size: 5pt;
+}
+
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 500px;
+  width: 600px;
+}
+
+.map-container-5 {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.map-container-5 iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 70%;
+  width: 70%;
+}
+
+.card {
+  border: none;
+}
+
+.head_title {
+  font-size: 35px;
+  font-variant: small-caps;
+}
+
+.text-ThemeColour {
+  color: var(--StLRed);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+hr {
+  display: block;
+  border-width: 3px;
+  color: var(--StLRed);
+  background-color: var(--StLRed);
+}
+
+.nav-bg-gold {
+  background-color: var(--StLGoldPale) !important
+}
+
+a.nav-bg-gold:focus, a.nav-bg-gold:hover, button.nav-bg-gold:focus, button.nav-bg-gold:hover {
+  background-color: #dae0e5 !important
+}
+
+.navbar-nav.navbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
+.navbar {
+  border-bottom: 5px solid var(--StLRed);
+  border-top: 5px solid var(--StLRed);
+}
+
+.site-footer {
+  background-color: #c8c8c8;
+  padding: 20px 0 10px;
+  font-size: 15px;
+  line-height: 24px;
+  color: #737373;
+}
+
+.site-footer hr {
+  border-top-color: #bbb;
+  opacity: 0.5
+}
+
+.site-footer hr.small {
+  margin: 20px 0
+}
+
+.site-footer h6 {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  letter-spacing: 2px
+}
+
+.site-footer a {
+  color: #737373;
+}
+
+.site-footer a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.footer-links {
+  padding-left: 0;
+  list-style: none
+}
+
+.footer-links li {
+  display: block
+}
+
+.footer-links a {
+  color: #737373
+}
+
+.footer-links a:active, .footer-links a:focus, .footer-links a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.footer-links.inline li {
+  display: inline-block
+}
+
+.site-footer .social-icons {
+  text-align: right
+}
+
+.site-footer .social-icons a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 6px;
+  margin-right: 0;
+  border-radius: 100%;
+  background-color: #33353d
+}
+
+.copyright-text {
+  margin: 0
+}
+
+@media (max-width: 991px) {
+  .site-footer [class^=col-] {
+    margin-bottom: 30px
+  }
+}
+
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: 0
+  }
+
+  .site-footer .copyright-text, .site-footer .social-icons {
+    text-align: center
+  }
+}
+
+.social-icons {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none
+}
+
+.social-icons li {
+  display: inline-block;
+  margin-bottom: 4px
+}
+
+.social-icons li.title {
+  margin-right: 15px;
+  text-transform: uppercase;
+  color: #96a2b2;
+  font-weight: 700;
+  font-size: 13px
+}
+
+.social-icons a {
+  background-color: #eceeef;
+  color: #818a91;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 44px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+  -webkit-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear
+}
+
+.social-icons a:active, .social-icons a:focus, .social-icons a:hover {
+  color: #fff;
+  background-color: #29aafe
+}
+
+.social-icons.size-sm a {
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  font-size: 14px
+}
+
+.social-icons a.facebook:hover {
+  background-color: #3b5998
+}
+
+.social-icons a.twitter:hover {
+  background-color: #00aced
+}
+
+.social-icons a.linkedin:hover {
+  background-color: #007bb6
+}
+
+.social-icons a.dribbble:hover {
+  background-color: #ea4c89
+}
+
+@media (max-width: 767px) {
+  .social-icons li.title {
+    display: block;
+    margin-right: 0;
+    font-weight: 600
+  }
+}
+
+.imgTextWrapRight {
+  float: right;
+  clear: left;
+  max-width: 50%;
+}
+
+.imgTextWrapLeft {
+  float: left;
+  clear: right;
+  margin: 10px;
+  max-width: 50%;
+}
+
+.figBox {
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+  border: thin silver solid;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.bellName {
+  font-size: 35px;
+  font-variant: small-caps;
+}
+
+.bellItem {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--StLRed);
+}
+
+.bellInstence {
+  font-size: 15px;
+}
+
+.navbar-red .navbar-brand {
+  color: rgba(255, 0, 1, 0.9)
+}
+
+.navbar-red .navbar-brand:focus, .navbar-red .navbar-brand:hover {
+  color: rgba(255, 0, 1, 0.9)
+}
+
+.navbar-red .navbar-nav .nav-link {
+  color: rgba(255, 0, 1, 0.5)
+}
+
+.navbar-red .navbar-nav .nav-link:focus, .navbar-red .navbar-nav .nav-link:hover {
+  color: rgba(255, 0, 1, .7)
+}
+
+.navbar-red .navbar-nav .nav-link.disabled {
+  color: rgba(255, 0, 1, .3)
+}
+
+.navbar-red .navbar-nav .active > .nav-link, .navbar-red .navbar-nav .nav-link.active, .navbar-red .navbar-nav .nav-link.show, .navbar-red .navbar-nav .show > .nav-link {
+  color: rgba(255, 0, 1, .9)
+}
+
+.navbar-red .navbar-toggler {
+  color: rgba(255, 0, 1, .5);
+  border-color: rgba(255, 0, 1, .1)
+}
+
+.navbar-red .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+
+.navbar-red .navbar-text {
+  color: rgba(255, 0, 1, .5)
+}
+
+.navbar-red .navbar-text a {
+  color: rgba(255, 0, 1, .9)
+}
+
+.navbar-red .navbar-text a:focus, .navbar-red .navbar-text a:hover {
+  color: rgba(255, 0, 1, .9)
+}
+
+.alert {
+  line-height: 30px;
+  font-family: Sitka Heading;
+  color: var(--StLRed);
+  font-size: 30pt;
+  font-style: normal;
+  letter-spacing: 4px;
+  font-variant: small-caps;
+  text-align: center;
+  font-weight: normal
+}
+
+.alertText {
+  line-height: 15px;
+  font-family: Sitka Heading;
+  color: var(--StLRed);
+  font-size: 15pt;
+  font-style: normal;
+  letter-spacing: 4px;
+  font-variant: small-caps;
+  text-align: center;
+  font-weight: normal
+}
+
+p.historyHeaders {
+  font-weight: bold;
+  color: var(--StLRed);
+  text-decoration: underline;
+}
+
+.button {
+  background-color: white;
+  border: 2px solid #D2D2D2;
+  color: black;
+  padding: 10px 10px;
+  max-width: 10em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}
