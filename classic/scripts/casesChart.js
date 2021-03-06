@@ -175,49 +175,5 @@ $.ajax(caseSettings).done(
         }
       }
     )
-
-    var options = {
-      series: [{
-        name: 'PRODUCT A',
-        data: caseProportion[0]
-      }, {
-        name: 'PRODUCT B',
-        data: caseProportion[1]
-      }, {
-        name: 'PRODUCT C',
-        data: caseProportion[2]
-      }],
-      chart: {
-        type: 'bar',
-        height: 350,
-        stacked: true,
-        stackType: '100%'
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: 'bottom',
-            offsetX: -10,
-            offsetY: 0
-          }
-        }
-      }],
-      xaxis: {
-        categories: datesString,
-      },
-      fill: {
-        opacity: 1
-      },
-      legend: {
-        position: 'right',
-        offsetX: 0,
-        offsetY: 50
-      },
-      colors: chartColours[colourSequence][0]
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
   }
 );
