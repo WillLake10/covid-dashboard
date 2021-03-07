@@ -1,0 +1,51 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.pagetitle {
+    line-height: 45px;
+    font-family: Sitka Heading;
+    color: Black;
+    font-size: 35pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    text-align: center;
+    font-weight: normal
+}
+
+.pagesubtitle {
+    line-height: 45px;
+    font-family: Sitka Heading;
+    color: Black;
+    font-size: 20pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    text-align: center;
+    font-weight: normal
+}
+
+.chart-title {
+    line-height: 15px;
+    color: Black;
+    font-size: 15pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: underline;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.chart-subtitle {
+    line-height: 10px;
+    color: Black;
+    font-size: 10pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 20px;
+}

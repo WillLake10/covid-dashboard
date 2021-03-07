@@ -2,9 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Covid Dashboard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+
+    <script src="scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="scripts/Chart.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9c8cd2ffe8.js" crossorigin="anonymous"></script>
+
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/const.js"></script>
+
+    <script src="scripts/sidebar.js"></script>
 </head>
 <body>
 
+<script src="scripts/vaccinations.js"></script>
+<div style="padding-right: 5%; padding-left: 5%">
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Vaccine</a>
+        <a href="cases.html">Cases</a>
+        <a href="deaths.html">Deaths</a>
+    </div>
+
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeColPic()">&times;</a>
+        <a href="#" onclick="changeColour(0)">Grey</a>
+        <a href="#" onclick="changeColour(1)">Bold</a>
+        <a href="#" onclick="changeColour(2)">Blue</a>
+    </div>
+
+    <div id="main">
+        <div class="row">
+            <div class="col-md-3">
+                <button class="openbtn" onclick="openNav()">&#9776; Menu</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="pagetitle">
+                    Vaccine Progress
+                </div>
+            </div>
+        </div>
+
+        <div class="row pb-4" style="padding-top: 20px">
+            <div class="col-md-3">
+                <button class="openbtn" onclick="openColPick()">&#9776; Colour Picker</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="pagesubtitle">
+                    First Dose
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <canvas id="firstDoseDaily"></canvas>
+            </div>
+            <div class="col-md-4">
+            <span class="align-middle">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Number of people had 1st dose:</td>
+                    <th><span id="firstDose"></span></th>
+                </tr>
+                <tr>
+                    <td>Percent of UK population had 1st dose:</td>
+                    <th><span id="percFirstDose"></span>%</th>
+                </tr>
+                <tr>
+                    <td>Percent of UK Adult population had 1st dose:</td>
+                    <th><span id="percAdultFirstDose"></span>%</th>
+                </tr>
+                <tr>
+                    <td>Current 7 day rate:</td>
+                    <th><span id="currentSevenDayFirstDose"></span></th>
+                </tr>
+                </tbody>
+            </table>
+            </span>
+            </div>
+        </div>
+
+        <div class="row pt-4 pb-4">
+            <div class="col-12 col-md-12">
+                <div class="pagesubtitle">
+                    Second Dose
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <canvas id="secondDoseDaily"></canvas>
+            </div>
+            <div class="col-md-4">
+            <span class="align-middle">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Number of people had 2nd dose:</td>
+                    <th><span id="secondDose"></span></th>
+                </tr>
+                <tr>
+                    <td>Percent of UK population had 2nd dose:</td>
+                    <th><span id="percSecondDose"></span>%</th>
+                </tr>
+                <tr>
+                    <td>Percent of UK Adult population had 2nd dose:</td>
+                    <th><span id="percAdultSecondDose"></span>%</th>
+                </tr>
+                <tr>
+                    <td>Current 7 day rate:</td>
+                    <th><span id="currentSevenDaySecondDose"></span></th>
+                </tr>
+                </tbody>
+            </table>
+            </span>
+            </div>
+        </div>
+
+        <div class="row pt-4 pb-4">
+            <div class="col-12 col-md-12">
+                <div class="pagesubtitle">
+                    Both Doses
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="bothDosesDaily"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="bothDosesCum"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

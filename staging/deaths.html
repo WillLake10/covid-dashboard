@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Dashboard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+
+    <script src="scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="scripts/Chart.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9c8cd2ffe8.js" crossorigin="anonymous"></script>
+
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/const.js"></script>
+
+    <script src="scripts/sidebar.js"></script>
+</head>
+<body>
+
+<script src="scripts/deaths.js"></script>
+
+<div style="padding-right: 5%; padding-left: 5%">
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Vaccine</a>
+        <a href="cases.html">Cases</a>
+        <a href="deaths.html">Deaths</a>
+    </div>
+
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeColPic()">&times;</a>
+        <a href="#" onclick="changeColour(0)">Grey</a>
+        <a href="#" onclick="changeColour(1)">Bold</a>
+        <a href="#" onclick="changeColour(2)">Blue</a>
+    </div>
+
+    <div id="main">
+        <div class="row">
+            <div class="col-md-3">
+                <button class="openbtn" onclick="openNav()">&#9776; Menu</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="pagetitle">
+                    Deaths
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="changHowLongBack">How Long Back:</label>
+                <input type="text" id="changHowLongBack" name="How Many Days Back">
+                <button class="openbtn" style="border-radius: 100%" onclick="changeHowLongBack()">Go</button>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 20px">
+            <div class="col-md-3">
+                <button class="openbtn" onclick="openColPick()">&#9776; Colour Picker</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="pagesubtitle">
+                    England
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 20px">
+            <div class="col-12 col-md-12">
+                <div class="chart-title">
+                    Daily Average Deaths
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="dailyDeaths"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-title">
+            Percent Change of Deaths by Age Group
+        </div>
+        <div class="chart-subtitle">(Past <span id="howLongBack1"></span> days)</div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="deathsChange"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-title">
+            Percent Change of Deaths by Large Age Group Bands
+        </div>
+        <div class="chart-subtitle">(Past <span id="howLongBack2"></span> days)</div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="deathsChangeBands"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-title">
+            Deaths Half Rate
+        </div>
+        <div class="chart-subtitle">(Past <span id="howLongBack3"></span> days)</div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="deathsChangeHalf"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-title">
+            Deaths per 100,000
+        </div>
+        <div class="chart-subtitle">(Past <span id="howLongBack4"></span> days)</div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="deathsPer100000"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-title">
+            Deaths per 100,000
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="deathsProportionChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeHowLongBack() {
+        var x = document.getElementById("changHowLongBack").value
+        console.log(Number.isInteger(parseInt(x)))
+        if (Number.isInteger(parseInt(x))){
+            if (parseInt(x) > datediff(new Date("11/09/2020"), new Date())){
+                setCookie("howLongBack", datediff(new Date("11/09/2020"), new Date()), 5)
+            } else {
+                setCookie("howLongBack", x, 5)
+            }
+        }
+        location.reload()
+    }
+</script>
+</body>
+</html>
