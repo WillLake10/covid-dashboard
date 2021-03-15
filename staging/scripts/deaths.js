@@ -155,22 +155,22 @@ async function deaths(url) {
     for (let i = 0; i < 8; i++) {
         if (i === 0) thisData = zeroToSixtyDeaths
         else thisData = avgDeaths[i + 11]
-        deathsChartDataSet.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][1][i], thisData, 'line'))
+        deathsChartDataSet.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][1][i], thisData, 'line'))
         if (i === 0) thisData = zeroToSixtyDeathsChangef
         else thisData = avgDeathsChangef[i - 1]
-        deathsChangeChartDataSet.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][1][i], thisData, 'line'))
-        ageDeathsHalfDataset.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][1][i], deathsHalfF[i], 'line'))
-        deathsProportionChartDataSet.push(dataSet(ageBracketsUpper[7-i], chartColours[colourSequence][1][7 - i], '#000000', deathsProportion[i], 'bar'))
+        deathsChangeChartDataSet.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][1][i], thisData, 'line'))
+        ageDeathsHalfDataset.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][1][i], deathsHalfF[i], 'line'))
+        deathsProportionChartDataSet.push(dataSet(ageBracketsUpper[7-i], chartColours[darkmode][colourSequence][1][7 - i], '#000000', deathsProportion[i], 'bar'))
     }
 
     for (let i = 0; i < ageBrackets.length; i++) {
-        deathsRateDataSet.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][0][i], deathRateF[i], 'line'))
+        deathsRateDataSet.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], deathRateF[i], 'line'))
     }
 
     for (let i = 0; i < 4; i++) {
         if (i === 0) thisData = zeroToSixtyDeathsChangef
         else thisData = avgDeathsChangeLarge[i - 1]
-        deathsChangeLargeChartDataSet.push(dataSet(ageBracketsUpperLarge[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][3][i], thisData, 'line'))
+        deathsChangeLargeChartDataSet.push(dataSet(ageBracketsUpperLarge[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][3][i], thisData, 'line'))
     }
 
     chartWithTag('dailyDeaths', 'line', datesString, deathsChartDataSet)

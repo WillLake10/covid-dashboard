@@ -32,8 +32,7 @@
         }
     }
 </script>
-
-<script src="scripts/vaccinations.js"></script>
+<script src="scripts/casesDeaths.js"></script>
 <div style="padding-right: 5%; padding-left: 5%">
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -57,116 +56,51 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="pagetitle">
-                    Vaccine Progress
+                    Cases & Deaths
                 </div>
             </div>
             <div class="col-md-3">
-                <label class="switch" style="float: right;">
-                    <input type="checkbox" onclick="toggleDark()" id="darkModeToggle" checked="">
-                    <span class="slider round"></span>
-                </label>
+                <div style="float: right;">
+                    <label class="switch">
+                        <input type="checkbox" onclick="toggleDark()" id="darkModeToggle" checked="">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
-
-        <div class="row pb-4" style="padding-top: 20px">
+        <div class="row" style="padding-top: 20px">
             <div class="col-md-3">
                 <button class="openbtn" onclick="openColPick()">&#9776; Colour Picker</button>
             </div>
             <div class="col-12 col-md-6">
                 <div class="pagesubtitle">
-                    First Dose
+                    Cases and deaths Matched
                 </div>
             </div>
         </div>
+        <div class="chart-subtitle">(Deaths shifted by 14 days)</div>
 
         <div class="row">
-            <div class="col-md-8">
-                <canvas id="firstDoseDaily"></canvas>
-            </div>
-            <div class="col-md-4">
-            <span class="align-middle">
-            <table class="table table-striped table-item">
-                <tbody>
-                <tr>
-                    <td>Number of people had 1st dose:</td>
-                    <th><span id="firstDose"></span></th>
-                </tr>
-                <tr>
-                    <td>Percent of UK population had 1st dose:</td>
-                    <th><span id="percFirstDose"></span>%</th>
-                </tr>
-                <tr>
-                    <td>Percent of UK Adult population had 1st dose:</td>
-                    <th><span id="percAdultFirstDose"></span>%</th>
-                </tr>
-                <tr>
-                    <td>Current 7 day rate:</td>
-                    <th><span id="currentSevenDayFirstDose"></span></th>
-                </tr>
-                </tbody>
-            </table>
-            </span>
+            <div class="col-md-12">
+                <canvas id="caseDeathChart"></canvas>
             </div>
         </div>
 
-        <div class="row pt-4 pb-4">
-            <div class="col-12 col-md-12">
-                <div class="pagesubtitle">
-                    Second Dose
-                </div>
-            </div>
+        <div class="chart-title">
+            Percent of Deaths from cases after 14 day shift
         </div>
 
         <div class="row">
-            <div class="col-md-8">
-                <canvas id="secondDoseDaily"></canvas>
-            </div>
-            <div class="col-md-4">
-            <span class="align-middle">
-            <table class="table table-striped table-item">
-                <tbody>
-                <tr>
-                    <td>Number of people had 2nd dose:</td>
-                    <th><span id="secondDose"></span></th>
-                </tr>
-                <tr>
-                    <td>Percent of UK population had 2nd dose:</td>
-                    <th><span id="percSecondDose"></span>%</th>
-                </tr>
-                <tr>
-                    <td>Percent of UK Adult population had 2nd dose:</td>
-                    <th><span id="percAdultSecondDose"></span>%</th>
-                </tr>
-                <tr>
-                    <td>Current 7 day rate:</td>
-                    <th><span id="currentSevenDaySecondDose"></span></th>
-                </tr>
-                </tbody>
-            </table>
-            </span>
-            </div>
-        </div>
-
-        <div class="row pt-4 pb-4">
-            <div class="col-12 col-md-12">
-                <div class="pagesubtitle">
-                    Both Doses
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <canvas id="bothDosesDaily"></canvas>
-            </div>
-            <div class="col-md-6">
-                <canvas id="bothDosesCum"></canvas>
+            <div class="col-md-12">
+                <canvas id="caseDeathDiff"></canvas>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     const theme = document.querySelector("#theme-link");
+
     function toggleDark() {
         // Swap out the URL for the different stylesheets
         if (getCookie("darkMode") === "0") {

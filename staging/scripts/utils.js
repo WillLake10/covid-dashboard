@@ -115,7 +115,12 @@ function chartWithTag(
     type,
     label,
     dataset,
-    options = {}
+    options = {
+        scales: {
+            xAxes: [{gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
+            yAxes: [{gridLines: {display: true, color: chartStyleColours[darkmode][0], zeroLineColor: chartStyleColours[darkmode][1], zeroLineWidth: 2}}]
+        }
+    }
 ) {
     new Chart(
         document.getElementById(tag).getContext('2d'),
@@ -128,16 +133,16 @@ function valReturn(tag, data) {
 }
 
 function valReturnSet(data) {
-    for (let i = 0; i < data.length; i++){
+    for (let i = 0; i < data.length; i++) {
         valReturn(data[i][0], data[i][1])
     }
 }
 
-function getHalfRate(Original, New, Time){
+function getHalfRate(Original, New, Time) {
     return (Time * -(Math.log(2))) / (Math.log(Original / New))
 }
 
 function datediff(first, second) {
-    return Math.round((second-first)/(1000*60*60*24));
+    return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
 

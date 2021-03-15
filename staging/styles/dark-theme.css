@@ -1,0 +1,31 @@
+.body {
+    background-color: #0b0b0b;
+}
+
+.pagetitle {
+    color: #ffffff;
+}
+
+.pagesubtitle {
+    color: #ffffff;
+}
+
+.chart-title {
+    color: #ffffff;
+}
+
+.chart-subtitle {
+    color: #ffffff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, .1)
+}
+
+.table-item {
+    color: #d8d8d8;
+}
+
+.label {
+    color: #ffffff;
+}

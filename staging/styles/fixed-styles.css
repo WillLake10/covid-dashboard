@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .sidebar {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -97,4 +101,109 @@
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+
+/*Dark mode toggle*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #292929;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #dbdbdb;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #dbdbdb;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.pagetitle {
+    line-height: 45px;
+    font-family: Sitka Heading;
+    font-size: 35pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    text-align: center;
+    font-weight: normal
+}
+
+.pagesubtitle {
+    line-height: 45px;
+    font-family: Sitka Heading;
+    font-size: 20pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    text-align: center;
+    font-weight: normal
+}
+
+.chart-title {
+    line-height: 15px;
+    font-size: 15pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: underline;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.chart-subtitle {
+    line-height: 10px;
+    font-size: 10pt;
+    font-style: normal;
+    letter-spacing: 4px;
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 20px;
 }

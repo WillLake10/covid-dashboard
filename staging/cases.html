@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <link rel="stylesheet" href="styles/main.css" type="text/css">
-    <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/fixed-styles.css">
+    <link rel="stylesheet" href="styles/light-theme.css" type="text/css"  id="theme-link">
 
     <script src="scripts/jquery.min.js" type="text/javascript"></script>
     <script src="scripts/Chart.min.js" type="text/javascript"></script>
@@ -20,8 +20,18 @@
 
     <script src="scripts/sidebar.js"></script>
 </head>
-<body>
-
+<body class="body">
+<script>
+    onload = function () {
+        if (getCookie("darkMode") === "1") {
+            theme.href = "styles/dark-theme.css";
+            document.getElementById('darkModeToggle').checked = "checked"
+        } else {
+            theme.href = "styles/light-theme.css";
+            document.getElementById('darkModeToggle').checked = ""
+        }
+    }
+</script>
 <script src="scripts/cases.js"></script>
 
 <div style="padding-right: 5%; padding-left: 5%">
@@ -30,6 +40,7 @@
         <a href="index.html">Vaccine</a>
         <a href="cases.html">Cases</a>
         <a href="deaths.html">Deaths</a>
+        <a href="casesDeaths.html">Cases&Deaths</a>
     </div>
 
     <div id="mySidepanel" class="sidepanel">
@@ -50,9 +61,12 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <label for="changHowLongBack">How Long Back:</label>
-                <input type="text" id="changHowLongBack" name="How Many Days Back">
-                <button class="openbtn" style="border-radius: 100%" onclick="changeHowLongBack()">Go</button>
+                <div style="float: right;">
+                    <label class="switch">
+                        <input type="checkbox" onclick="toggleDark()" id="darkModeToggle" checked="">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="row" style="padding-top: 20px">
@@ -62,6 +76,12 @@
             <div class="col-12 col-md-6">
                 <div class="pagesubtitle">
                     England
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div style="float: right;">
+                    <label for="changHowLongBack" class="label">How Long Back:</label>
+                    <input type="number" id="changHowLongBack" name="How Many Days Back" min="1" max="200">
                 </div>
             </div>
         </div>
@@ -121,17 +141,35 @@
 </div>
 
 <script>
-    function changeHowLongBack() {
-        var x = document.getElementById("changHowLongBack").value
-        console.log(Number.isInteger(parseInt(x)))
-        if (Number.isInteger(parseInt(x))){
-            if (parseInt(x) > datediff(new Date("11/09/2020"), new Date())){
-                setCookie("howLongBack", datediff(new Date("11/09/2020"), new Date()), 5)
-            } else {
-                setCookie("howLongBack", x, 5)
+    var input = document.getElementById("changHowLongBack");
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            var x = document.getElementById("changHowLongBack").value
+            console.log(Number.isInteger(parseInt(x)))
+            if (Number.isInteger(parseInt(x))) {
+                if (parseInt(x) > datediff(new Date("11/09/2020"), new Date())) {
+                    setCookie("howLongBack", datediff(new Date("11/09/2020"), new Date()), 5)
+                } else {
+                    setCookie("howLongBack", x, 5)
+                }
             }
+            location.reload()
         }
-        location.reload()
+    })
+
+    const theme = document.querySelector("#theme-link");
+
+    function toggleDark() {
+        // Swap out the URL for the different stylesheets
+        if (getCookie("darkMode") === "0") {
+            theme.href = "styles/dark-theme.css";
+            setCookie("darkMode", 1, 5)
+            location.reload()
+        } else {
+            theme.href = "styles/light-theme.css";
+            setCookie("darkMode", 0, 5)
+            location.reload()
+        }
     }
 </script>
 

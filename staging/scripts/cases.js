@@ -41,7 +41,7 @@ async function cases(url) {
 
     for (let i = 0; i < ageBrackets.length; i++) {
         casesAvg[i] = doAvg(dailyCases[i], casesAvg[i])
-        ageCasesChartDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][0][i], casesAvg[i], 'line'))
+        ageCasesChartDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], casesAvg[i], 'line'))
     }
 
     for (let i = caseRate[0].length - howLongBack; i < caseRate[0].length; i++) {
@@ -77,13 +77,13 @@ async function cases(url) {
 
 
     for (let i = 0; i < ageBrackets.length; i++) {
-        ageCasesChangeDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][0][i], caseChangef[i], 'line'))
-        ageCasesHalfDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][0][i], caseHalfF[i], 'line'))
-        ageCasesRateChartDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][0][i], caseRateF[i], 'line'))
+        ageCasesChangeDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseChangef[i], 'line'))
+        ageCasesHalfDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseHalfF[i], 'line'))
+        ageCasesRateChartDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseRateF[i], 'line'))
     }
 
     for (let i = 0; i < ageBracketsTwentys.length; i++) {
-        caseChangeBandDataset.push(dataSet(ageBracketsTwentys[i], 'rgba(0, 0, 0, 0)', chartColours[colourSequence][2][i], caseChangeBands[i], 'line'))
+        caseChangeBandDataset.push(dataSet(ageBracketsTwentys[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][2][i], caseChangeBands[i], 'line'))
     }
 
     chartWithTag('dailyCases', 'line', casesDatesString, ageCasesChartDataset)

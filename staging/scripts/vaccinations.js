@@ -29,29 +29,67 @@ async function vaccine(url) {
     let firstDoseAvg = doAvg(firstDose, [null, null, null, null])
     let secondDoseAvg = doAvg(secondDose, [null, null, null, null])
 
-    let dailyFirstDoseDataset = dataSet("Daily First Dose", chartColours[colourSequence][4][3], 'rgb(0, 0, 0)', firstDose, 'bar')
-    let dailySecondDoseDataset = dataSet("Daily Second Dose", chartColours[colourSequence][4][3], 'rgb(0, 0, 0)', secondDose, 'bar')
-    let dailySecondDoseRedDataset = dataSet("Daily Second Dose", chartColours[colourSequence][4][2], 'rgb(0, 0, 0)', secondDose, 'bar')
-    let avgFirstDoseDataset = dataSet("First Dose 7 Day Average", 'rgba(0, 0, 0, 0)', chartColours[colourSequence][4][2], firstDoseAvg, 'line')
-    let avgSecondDoseDataset = dataSet("Second Dose 7 Day Average", 'rgba(0, 0, 0, 0)', chartColours[colourSequence][4][2], secondDoseAvg, 'line')
-    let cumFirstDoseDataset = dataSet("Cumulative First Dose", chartColours[colourSequence][4][3], 'rgb(0, 0, 0)', firstDoseCum, 'bar')
-    let cumSecondDoseDataset = dataSet("Cumulative Second Dose", chartColours[colourSequence][4][2], 'rgb(0, 0, 0)', secondDoseCum, 'bar')
+    let dailyFirstDoseDataset = dataSet("Daily First Dose", chartColours[darkmode][colourSequence][4][3], 'rgb(0, 0, 0)', firstDose, 'bar')
+    let dailySecondDoseDataset = dataSet("Daily Second Dose", chartColours[darkmode][colourSequence][4][3], 'rgb(0, 0, 0)', secondDose, 'bar')
+    let dailySecondDoseRedDataset = dataSet("Daily Second Dose", chartColours[darkmode][colourSequence][4][2], 'rgb(0, 0, 0)', secondDose, 'bar')
+    let avgFirstDoseDataset = dataSet("First Dose 7 Day Average", 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][4][2], firstDoseAvg, 'line')
+    let avgSecondDoseDataset = dataSet("Second Dose 7 Day Average", 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][4][2], secondDoseAvg, 'line')
+    let cumFirstDoseDataset = dataSet("Cumulative First Dose", chartColours[darkmode][colourSequence][4][3], 'rgb(0, 0, 0)', firstDoseCum, 'bar')
+    let cumSecondDoseDataset = dataSet("Cumulative Second Dose", chartColours[darkmode][colourSequence][4][2], 'rgb(0, 0, 0)', secondDoseCum, 'bar')
 
 
     chartWithTag('firstDoseDaily', 'bar', datesString, [avgFirstDoseDataset, dailyFirstDoseDataset],
-        {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true}}]}})
+        {
+            scales: {
+                xAxes: [{stacked: true, gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {beginAtZero: true},
+                    gridLines: {display: true, color: chartStyleColours[darkmode][0]}
+                }]
+            }
+        }
+    )
 
     chartWithTag('secondDoseDaily', 'bar', datesString, [avgSecondDoseDataset, dailySecondDoseDataset],
-        {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true}}]}})
+        {
+            scales: {
+                xAxes: [{stacked: true, gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {beginAtZero: true},
+                    gridLines: {display: true, color: chartStyleColours[darkmode][0]}
+                }]
+            }
+        }
+    )
 
     chartWithTag(
         'bothDosesDaily', 'bar', datesString, [dailyFirstDoseDataset, dailySecondDoseRedDataset],
-        {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true}}]}}
+        {
+            scales: {
+                xAxes: [{stacked: true, gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {beginAtZero: true},
+                    gridLines: {display: true, color: chartStyleColours[darkmode][0]}
+                }]
+            }
+        }
     )
 
     chartWithTag(
         'bothDosesCum', 'bar', datesString, [cumFirstDoseDataset, cumSecondDoseDataset],
-        {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true}}]}}
+        {
+            scales: {
+                xAxes: [{stacked: true, gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {beginAtZero: true},
+                    gridLines: {display: true, color: chartStyleColours[darkmode][0]}
+                }]
+            }
+        }
     )
 
     valReturnSet([

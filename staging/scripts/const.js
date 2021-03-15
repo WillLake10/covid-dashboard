@@ -9,9 +9,13 @@ if (document.cookie.indexOf('areaName=') === -1) {
     setCookie("areaName", "England", 5)
     setCookie("areaType", "nation", 5)
 }
+if (document.cookie.indexOf('darkMode=') === -1) {
+    setCookie("darkMode", 0, 5)
+}
 
 let colourSequence = getCookie("colourSequence")
 let howLongBack = getCookie("howLongBack")
+let darkmode = getCookie("darkMode")
 
 const ukPopulation = 66796800
 const ukAdultPopulation = 51200000
@@ -154,27 +158,81 @@ const colourSchemes = [
         '#000080',
         '#191970'
     ],
+    [
+        '#323232',
+        '#3C3C3C',
+        '#464646',
+        '#505050',
+        '#5A5A5A',
+        '#646464',
+        '#6E6E6E',
+        '#787878',
+        '#828282',
+        '#8C8C8C',
+        '#969696',
+        '#A0A0A0',
+        '#AAAAAA',
+        '#B4B4B4',
+        '#BEBEBE',
+        '#C8C8C8',
+        '#D2D2D2',
+        '#DCDCDC',
+        '#E6E6E6'
+    ],
 ]
 
 const chartColours = [
-    stdScale(0),
     [
-        colourSchemes[1],
+        stdScale(0),
         [
-            colourSchemes[1][0],
-            colourSchemes[1][1],
-            colourSchemes[1][2],
-            colourSchemes[1][3],
-            colourSchemes[1][4],
-            colourSchemes[1][5],
-            colourSchemes[1][6],
-            colourSchemes[1][18]
+            colourSchemes[1],
+            [
+                colourSchemes[1][0],
+                colourSchemes[1][1],
+                colourSchemes[1][2],
+                colourSchemes[1][3],
+                colourSchemes[1][4],
+                colourSchemes[1][5],
+                colourSchemes[1][6],
+                colourSchemes[1][18]
+            ],
+            [colourSchemes[1][0], colourSchemes[1][1], colourSchemes[1][4], colourSchemes[1][5], colourSchemes[1][18]],
+            [colourSchemes[1][0], colourSchemes[1][1], colourSchemes[1][4], colourSchemes[1][18]],
+            [colourSchemes[1][6], colourSchemes[1][18], colourSchemes[1][0], colourSchemes[1][3]],
         ],
-        [colourSchemes[1][0], colourSchemes[1][1], colourSchemes[1][4], colourSchemes[1][5], colourSchemes[1][18]],
-        [colourSchemes[1][0], colourSchemes[1][1], colourSchemes[1][4], colourSchemes[1][18]],
-        [colourSchemes[1][6], colourSchemes[1][18], colourSchemes[1][0], colourSchemes[1][3]],
+        stdScale(2)
     ],
-    stdScale(2)
+    [
+        stdScale(3),
+        [
+            colourSchemes[1],
+            [
+                colourSchemes[1][0],
+                colourSchemes[1][1],
+                colourSchemes[1][2],
+                colourSchemes[1][3],
+                colourSchemes[1][4],
+                colourSchemes[1][5],
+                colourSchemes[1][6],
+                colourSchemes[1][18]
+            ],
+            [colourSchemes[1][0], colourSchemes[1][1], colourSchemes[1][4], colourSchemes[1][5], colourSchemes[1][18]],
+            [colourSchemes[1][0], colourSchemes[1][1], colourSchemes[1][4], colourSchemes[1][18]],
+            [colourSchemes[1][6], colourSchemes[1][18], colourSchemes[1][0], colourSchemes[1][3]],
+        ],
+        stdScale(2)
+    ]
+]
+
+const chartStyleColours = [
+    [
+        'rgba(0,0,0,0.1)',
+        'rgba(0,0,0,0.25)'
+    ],
+    [
+        'rgba(255,255,255,0.1)',
+        'rgba(255,255,255,0.25)'
+    ]
 ]
 
 function stdScale(colourSchemeNum) {
@@ -204,10 +262,10 @@ function stdScale(colourSchemeNum) {
             colourSchemes[colourSchemeNum][18]
         ],
         [
-            colourSchemes[colourSchemeNum][0],
-            colourSchemes[colourSchemeNum][18],
-            colourSchemes[colourSchemeNum][18],
-            colourSchemes[colourSchemeNum][0]
+            colourSchemes[colourSchemeNum][4],
+            colourSchemes[colourSchemeNum][14],
+            colourSchemes[colourSchemeNum][14],
+            colourSchemes[colourSchemeNum][4]
         ]
     ]
 }
