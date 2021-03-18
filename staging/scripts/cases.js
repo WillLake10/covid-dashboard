@@ -18,7 +18,8 @@ async function cases(url) {
         caseChange = getBaseAgeGroupArray(), caseChangef = getBaseAgeGroupArray(), caseHalf = getBaseAgeGroupArray(),
         caseHalfF = getBaseAgeGroupArray(), caseRateF = getBaseAgeGroupArray()
 
-    const ageCasesChartDataset = [], ageCasesChangeDataset = [], caseChangeBandDataset = [], ageCasesHalfDataset = [], ageCasesRateChartDataset = []
+    const ageCasesChartDataset = [], ageCasesChangeDataset = [], caseChangeBandDataset = [], ageCasesHalfDataset = [],
+        ageCasesRateChartDataset = []
 
     for (let i = 0; i < caseData.length; i++) {
         const temp = new Date(caseData[i].date)
@@ -87,7 +88,19 @@ async function cases(url) {
     }
 
     chartWithTag('dailyCases', 'line', casesDatesString, ageCasesChartDataset)
-    chartWithTag('casesChange', 'line', datesStringHowLong, ageCasesChangeDataset)
+    chartWithTag('casesChange', 'line', datesStringHowLong, ageCasesChangeDataset, {
+        scales: {
+            xAxes: [{gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
+            yAxes: [{
+                ticks: {min: -55, max: 55}, gridLines: {
+                    display: true,
+                    color: chartStyleColours[darkmode][0],
+                    zeroLineColor: chartStyleColours[darkmode][1],
+                    zeroLineWidth: 2
+                }
+            }]
+        }
+    })
     chartWithTag('casesChangeBands', 'line', datesStringHowLong, caseChangeBandDataset)
     chartWithTag('casesChangeHalf', 'line', datesStringHowLong, ageCasesHalfDataset)
     chartWithTag('casesPer100000', 'line', datesStringHowLong, ageCasesRateChartDataset)
