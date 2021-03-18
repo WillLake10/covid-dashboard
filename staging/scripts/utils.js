@@ -1,7 +1,8 @@
 function doAvg(day, avrg) {
     for (let i = 7; i < day.length; i++) {
         avrg.push(
-            (Math.round(
+            (
+                Math.round(
                     (
                         (
                             day[i] +
@@ -12,9 +13,9 @@ function doAvg(day, avrg) {
                             day[i - 5] +
                             day[i - 6]
                         ) / 7
-                    ) * 5
+                    ) * 10
                 )
-            ) / 5
+            ) / 10
         )
     }
     return avrg
@@ -118,7 +119,14 @@ function chartWithTag(
     options = {
         scales: {
             xAxes: [{gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
-            yAxes: [{gridLines: {display: true, color: chartStyleColours[darkmode][0], zeroLineColor: chartStyleColours[darkmode][1], zeroLineWidth: 2}}]
+            yAxes: [{
+                gridLines: {
+                    display: true,
+                    color: chartStyleColours[darkmode][0],
+                    zeroLineColor: chartStyleColours[darkmode][1],
+                    zeroLineWidth: 2
+                }
+            }]
         }
     }
 ) {
