@@ -1,6 +1,7 @@
 deaths(
     'https://api.coronavirus.data.gov.uk/v1/data?' +
-    'filters=areaType=nation;areaName=england&' +
+    // 'filters=areaType=nation;areaName=england&' +
+    'filters=areaType=overview&' +
     'structure={' +
     '"date":"date",' +
     '"newDeaths28DaysByDeathDate":"newDeaths28DaysByDeathDate",' +
@@ -44,10 +45,13 @@ async function deaths(url) {
     const deathcaseShort = [], dateShort = []
     for (let i = deathcase.length - howManyDays; i < deathcase.length; i++) {
         deathcaseShort.push(deathcase[i] * 100)
-        if (i < deathcase.length - 13) {
+        if (i > deathcase.length - howManyDays + 13) {
+            dateShort.push(datesString[i])
         }
-        dateShort.push(datesString[i])
     }
+
+
+    for(let i = 0; i < 14; i++){deathcaseShort.pop()}
 
     console.log(deathsAvg)
 
@@ -128,7 +132,7 @@ async function deaths(url) {
                             display: true,
                             position: "right",
                             id: "y-axis-2",
-                            ticks: {min: 0, max: 1500},
+                            ticks: {min: 0, max: 1700},
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Deaths',
