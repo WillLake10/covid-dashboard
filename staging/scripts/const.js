@@ -18,7 +18,7 @@ let howLongBack = getCookie("howLongBack")
 let darkmode = getCookie("darkMode")
 
 const ukPopulation = 66796800
-const ukAdultPopulation = 51200000
+const ukAdultPopulation = 52400000
 const targetNumberMay = 32000000
 
 const projToDate = new Date(2021, 1, 13)
