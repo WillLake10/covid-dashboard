@@ -12,11 +12,11 @@ async function cases(url) {
     const data = await response.json()
     const caseData = data.data.reverse()
 
-    const casesDatesString = [], datesStringHowLong = [], caseChangeBands = [[], [], [], [], []]
+    const casesDatesString = [], datesStringHowLong = [], caseChangeBands = [[], [], [], [], []], caseTotal = []
 
     const dailyCases = getBaseAgeGroupArray(), caseRate = getBaseAgeGroupArray(), casesAvg = getBaseAvgArray(),
         caseChange = getBaseAgeGroupArray(), caseChangef = getBaseAgeGroupArray(), caseHalf = getBaseAgeGroupArray(),
-        caseHalfF = getBaseAgeGroupArray(), caseRateF = getBaseAgeGroupArray()
+        caseHalfF = getBaseAgeGroupArray(), caseRateF = getBaseAgeGroupArray(), caseProportion = getBaseAgeGroupArray()
 
     const ageCasesChartDataset = [], ageCasesChangeDataset = [], caseChangeBandDataset = [], ageCasesHalfDataset = [],
         ageCasesRateChartDataset = []
@@ -39,6 +39,18 @@ async function cases(url) {
     for (let i = casesDatesString.length - howLongBack; i < casesDatesString.length; i++) {
         datesStringHowLong.push(casesDatesString[i])
     }
+
+
+    console.log(dailyCases)
+
+    for (let i = 0; i < dailyCases[0].length; i++){
+        let total = 0;
+        for (let j = 0; j < ageBrackets.length; j++){
+            total += dailyCases[j][i]
+        }
+        caseTotal.push(total)
+    }
+
 
     for (let i = 0; i < ageBrackets.length; i++) {
         casesAvg[i] = doAvg(dailyCases[i], casesAvg[i])
@@ -104,7 +116,9 @@ async function cases(url) {
     chartWithTag('casesChangeBands', 'line', datesStringHowLong, caseChangeBandDataset)
     chartWithTag('casesChangeHalf', 'line', datesStringHowLong, ageCasesHalfDataset)
     chartWithTag('casesPer100000', 'line', datesStringHowLong, ageCasesRateChartDataset)
-
+    chartWithTag('casesProportionChart', 'bar', casesDatesString,  caseProportionChartDataSet,
+        {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true, min: 0, max: 100}}]}}
+    )
     valReturnSet([
         ["howLongBack1", howLongBack.toString()],
         ["howLongBack2", howLongBack.toString()],

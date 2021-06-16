@@ -3,7 +3,8 @@ deaths(
     'filters=areaType=nation;areaName=england&' +
     'structure={' +
     '"date":"date",' +
-    '"newDeaths28DaysByDeathDateAgeDemographics":"newDeaths28DaysByDeathDateAgeDemographics"}'
+    '"newDeaths28DaysByDeathDateAgeDemographics":"newDeaths28DaysByDeathDateAgeDemographics"' +
+    '}'
 );
 
 async function deaths(url) {

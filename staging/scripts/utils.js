@@ -21,6 +21,30 @@ function doAvg(day, avrg) {
     return avrg
 }
 
+function doAvgNoRound(day, avrg) {
+    for (let i = 7; i < day.length; i++) {
+        avrg.push(
+            (
+                Math.round(
+                    (
+                        (
+                            day[i] +
+                            day[i - 1] +
+                            day[i - 2] +
+                            day[i - 3] +
+                            day[i - 4] +
+                            day[i - 5] +
+                            day[i - 6]
+                        ) / 7
+                    ) * 10000
+                )
+            ) / 10000
+        )
+    }
+    return avrg
+}
+
+
 function getBaseAvgArray() {
     return [
         [null, null, null, null],
