@@ -60,7 +60,6 @@ async function vaccine(url) {
     let avgSecondDoseDataset = dataSet("Second Dose 7 Day Average", 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][4][2], secondDoseAvg, 'line')
     let avgBothDoseDataset = dataSet("Second Dose 7 Day Average", 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][4][2], bothDoseAvg, 'line')
     let cumFirstDoseDataset = dataSet("Cumulative First Dose", chartColours[darkmode][colourSequence][4][3], 'rgb(0, 0, 0)', firstDoseCum, 'bar')
-    let cumFirstDoseDatasetShift = dataSet("Cumulative First Dose", chartColours[darkmode][colourSequence][4][3], 'rgb(0, 0, 0)', firstDoseCumShift, 'bar')
     let cumSecondDoseDataset = dataSet("Cumulative Second Dose", chartColours[darkmode][colourSequence][1][2], 'rgb(0, 0, 0)', secondDoseCum, 'bar')
     let cumSecondDoseDatasetShift = dataSet("Cumulative Second Dose", chartColours[darkmode][colourSequence][1][2], 'rgb(0, 0, 0)', secondDoseCumShift, 'bar')
     let cumFirstMinSecondDoseDataset = dataSet("Cumulative First Dose Only", chartColours[darkmode][colourSequence][4][3], 'rgb(0, 0, 0)', cumFirstMinusSecond, 'bar')
