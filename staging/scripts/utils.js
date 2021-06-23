@@ -44,32 +44,15 @@ function doAvgNoRound(day, avrg) {
     return avrg
 }
 
-
-function getBaseAvgArray() {
-    return [
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null]
-    ]
+function baseArrAv() {
+    const nullBar = []
+    for (let i = 0; i < 19; i++) {
+        nullBar.push([null,null,null,null])
+    }
+    return nullBar
 }
 
-function getBaseAgeGroupArray() {
+function baseArr() {
     return [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
 }
 
@@ -177,4 +160,3 @@ function getHalfRate(Original, New, Time) {
 function datediff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
-

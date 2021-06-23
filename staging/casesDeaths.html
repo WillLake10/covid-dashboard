@@ -7,33 +7,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <link rel="stylesheet" href="styles/fixed-styles.css">
-    <link rel="stylesheet" href="styles/light-theme.css" type="text/css"  id="theme-link">
+    <link rel="stylesheet" href="styles/fixed-styles.min.css">
+    <link rel="stylesheet" href="styles/light-theme.min.css" type="text/css"  id="theme-link">
 
-    <script src="scripts/jquery.min.js" type="text/javascript"></script>
-    <script src="scripts/Chart.min.js" type="text/javascript"></script>
-    <script src="scripts/chartjs-plugin-annotation.min.js" type="text/javascript"></script>
+    <script src="librarys/jquery.min.js" type="text/javascript"></script>
+    <script src="librarys/Chart.min.js" type="text/javascript"></script>
+    <script src="librarys/chartjs-plugin-annotation.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9c8cd2ffe8.js" crossorigin="anonymous"></script>
 
-    <script src="scripts/utils.js"></script>
-    <script src="scripts/const.js"></script>
+    <script src="scripts/utils.min.js"></script>
+    <script src="scripts/const.min.js"></script>
 
-    <script src="scripts/sidebar.js"></script>
+    <script src="scripts/sidebar.min.js"></script>
 </head>
 <body class="body">
 <script>
     onload=function(){
         if (getCookie("darkMode") === "1") {
-            theme.href = "styles/dark-theme.css";
+            theme.href = "styles/dark-theme.min.css";
             document.getElementById('darkModeToggle').checked = "checked"
         } else {
-            theme.href = "styles/light-theme.css";
+            theme.href = "styles/light-theme.min.css";
             document.getElementById('darkModeToggle').checked = ""
         }
     }
 </script>
-<script src="scripts/casesDeaths.js"></script>
+<script src="scripts/casesDeaths.min.js"></script>
 <div style="padding-right: 5%; padding-left: 5%">
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -87,6 +87,14 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="caseDeathChartShort"></canvas>
+            </div>
+        </div>
+
+
+
         <div class="chart-title">
             Percent of Deaths from cases after 14 day shift
         </div>
@@ -104,6 +112,16 @@
         <div class="row">
             <div class="col-md-12">
                 <canvas id="caseDeathDiffAvg"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-title">
+            Percent of Hospital Admission from cases after 8 day shift
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="hosDeathDiff"></canvas>
             </div>
         </div>
     </div>

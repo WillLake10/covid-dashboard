@@ -23,6 +23,7 @@ async function deaths(url) {
     let deathsChangeChartDataSet = []
     let deathsChangeLargeChartDataSet = []
     let deathsProportionChartDataSet = []
+    let avgDeathsShortDataset = []
     let deathsRateDataSet = []
     let ageDeathsHalfDataset = []
     let totalDeathsByDate = []
@@ -32,12 +33,13 @@ async function deaths(url) {
     let avgDeathsChangeLarge = [[], [], []]
     let avgDeathsChangef = [[], [], [], [], [], [], []]
     let avgDeathsChange = [[], [], [], [], [], [], []]
+    let avgDeathsShort = [[], [], [], [], [], [], []]
     let thisData
 
-    let dailyDeaths = getBaseAgeGroupArray()
-    let deathRate = getBaseAgeGroupArray()
-    let deathRateF = getBaseAgeGroupArray()
-    let avgDeaths = getBaseAvgArray()
+    let dailyDeaths = baseArrAv()
+    let deathRate = baseArrAv()
+    let deathRateF = baseArrAv()
+    let avgDeaths = baseArrAv()
 
     //Create the dates and case ages datasets
     for (let i = 0; i < deathsData.length; i++) {
@@ -97,6 +99,8 @@ async function deaths(url) {
         }
     }
 
+    console.log(deathRate)
+
     for (let i = 0; i < avgDeaths[0].length; i++) {
         let total = 0
         for (let j = 0; j < avgDeaths.length; j++) {
@@ -149,9 +153,18 @@ async function deaths(url) {
         }
     }
 
-    console.log(deathsHalfF)
-
     deathsProportion.reverse()
+
+    for (let i = 0; i < 8; i++){
+        let current, temp = [];
+        if (i === 0) current = zeroToSixtyDeaths
+        else current = avgDeaths[i + 11]
+        for (let j = current.length - howLongBack; j < current.length; j++){
+            temp.push(current[j])
+        }
+        avgDeathsShort[i] = temp
+    }
+
 
     for (let i = 0; i < 8; i++) {
         if (i === 0) thisData = zeroToSixtyDeaths
@@ -161,9 +174,11 @@ async function deaths(url) {
         else thisData = avgDeathsChangef[i - 1]
         deathsChangeChartDataSet.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][1][i], thisData, 'line'))
         ageDeathsHalfDataset.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][1][i], deathsHalfF[i], 'line'))
+        avgDeathsShortDataset.push(dataSet(ageBracketsUpper[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][1][i], avgDeathsShort[i], 'line'))
         deathsProportionChartDataSet.push(dataSet(ageBracketsUpper[7-i], chartColours[darkmode][colourSequence][1][7 - i], '#000000', deathsProportion[i], 'bar'))
     }
 
+    console.log(deathRateF)
     for (let i = 0; i < ageBrackets.length; i++) {
         deathsRateDataSet.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], deathRateF[i], 'line'))
     }
@@ -176,6 +191,7 @@ async function deaths(url) {
 
     chartWithTag('dailyDeaths', 'line', datesString, deathsChartDataSet)
     chartWithTag('deathsChange', 'line', datesString2, deathsChangeChartDataSet)
+    chartWithTag('avgDeathsShort', 'line', datesString2, avgDeathsShortDataset)
     chartWithTag('deathsChangeBands', 'line', datesString2, deathsChangeLargeChartDataSet)
     chartWithTag('deathsChangeHalf', 'line', datesString2, ageDeathsHalfDataset)
     chartWithTag('deathsPer100000', 'line', datesString2,  deathsRateDataSet)

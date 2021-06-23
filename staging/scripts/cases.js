@@ -14,12 +14,12 @@ async function cases(url) {
 
     const casesDatesString = [], datesStringHowLong = [], caseChangeBands = [[], [], [], [], []], caseTotal = []
 
-    const dailyCases = getBaseAgeGroupArray(), caseRate = getBaseAgeGroupArray(), casesAvg = getBaseAvgArray(),
-        caseChange = getBaseAgeGroupArray(), caseChangef = getBaseAgeGroupArray(), caseHalf = getBaseAgeGroupArray(),
-        caseHalfF = getBaseAgeGroupArray(), caseRateF = getBaseAgeGroupArray(), caseProportion = getBaseAgeGroupArray()
+    const dailyCases = baseArr(), caseRate = baseArr(), casesAvg = baseArrAv(),
+        caseChange = baseArr(), caseChangef = baseArr(), caseHalf = baseArr(),
+        caseHalfF = baseArr(), caseRateF = baseArr(), caseRateShort = baseArr()
 
     const ageCasesChartDataset = [], ageCasesChangeDataset = [], caseChangeBandDataset = [], ageCasesHalfDataset = [],
-        ageCasesRateChartDataset = []
+        ageCasesRateChartDataset = [], ageCasesRateShortDataset = []
 
     for (let i = 0; i < caseData.length; i++) {
         const temp = new Date(caseData[i].date)
@@ -63,6 +63,12 @@ async function cases(url) {
         }
     }
 
+    for (let i = dailyCases[0].length - howLongBack; i < dailyCases[0].length; i++) {
+        for (let j = 0; j < dailyCases.length; j++) {
+            caseRateShort[j].push(casesAvg[j][i])
+        }
+    }
+
     let halfTimePass = 7
     for (let i = 0; i < casesAvg[0].length; i++) {
         for (let j = 0; j <= 18; j++) {
@@ -93,13 +99,26 @@ async function cases(url) {
         ageCasesChangeDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseChangef[i], 'line'))
         ageCasesHalfDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseHalfF[i], 'line'))
         ageCasesRateChartDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseRateF[i], 'line'))
+        ageCasesRateShortDataset.push(dataSet(ageBracketsDisplay[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][0][i], caseRateShort[i], 'line'))
     }
 
     for (let i = 0; i < ageBracketsTwentys.length; i++) {
         caseChangeBandDataset.push(dataSet(ageBracketsTwentys[i], 'rgba(0, 0, 0, 0)', chartColours[darkmode][colourSequence][2][i], caseChangeBands[i], 'line'))
     }
 
-    chartWithTag('dailyCases', 'line', casesDatesString, ageCasesChartDataset)
+    let caseDateStringAvg = [...casesDatesString]
+    let datesStringHowLongAvg = [...datesStringHowLong]
+
+    caseDateStringAvg.pop()
+    caseDateStringAvg.pop()
+    caseDateStringAvg.pop()
+
+    datesStringHowLongAvg.pop()
+    datesStringHowLongAvg.pop()
+    datesStringHowLongAvg.pop()
+
+    chartWithTag('dailyCases', 'line', caseDateStringAvg, ageCasesChartDataset)
+    chartWithTag('dailyCasesShort', 'line', datesStringHowLongAvg, ageCasesRateShortDataset)
     chartWithTag('casesChange', 'line', datesStringHowLong, ageCasesChangeDataset, {
         scales: {
             xAxes: [{gridLines: {display: true, color: chartStyleColours[darkmode][0]}}],
@@ -116,9 +135,9 @@ async function cases(url) {
     chartWithTag('casesChangeBands', 'line', datesStringHowLong, caseChangeBandDataset)
     chartWithTag('casesChangeHalf', 'line', datesStringHowLong, ageCasesHalfDataset)
     chartWithTag('casesPer100000', 'line', datesStringHowLong, ageCasesRateChartDataset)
-    chartWithTag('casesProportionChart', 'bar', casesDatesString,  caseProportionChartDataSet,
-        {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true, min: 0, max: 100}}]}}
-    )
+    // chartWithTag('casesProportionChart', 'bar', casesDatesString,  caseProportionChartDataSet,
+    //     {scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks: {beginAtZero: true, min: 0, max: 100}}]}}
+    // )
     valReturnSet([
         ["howLongBack1", howLongBack.toString()],
         ["howLongBack2", howLongBack.toString()],

@@ -19,4 +19,3 @@ function openColPick() {
 function closeColPic() {
     document.getElementById("mySidepanel").style.width = "0";
 }
-

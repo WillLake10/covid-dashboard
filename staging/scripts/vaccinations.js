@@ -33,6 +33,7 @@ async function vaccine(url) {
 
     let firstDoseCumShift = []
     let secondDoseCumShift = []
+
     for (let i = 0; i < 7*11; i++){
         firstDoseCumShift.push(null)
     }
