@@ -3,7 +3,7 @@ cases(
     'filters=areaType=' + getCookie("areaType") + ';areaName=' + getCookie("areaName") + '&' +
     'structure={' +
     '"date":"date",' +
-    '"newCasesBySpecimenDateAgeDemographics":"newCasesBySpecimenDateAgeDemographics"' +
+    '"newCasesBySpecimenDateAgeDemographics":"newCasesByPublishDateAgeDemographics"' +
     '}'
 );
 
@@ -11,7 +11,7 @@ async function cases(url) {
     const response = await fetch(url)
     const data = await response.json()
     const caseData = data.data.reverse()
-
+    console.log(caseData)
     const casesDatesString = [], datesStringHowLong = [], caseChangeBands = [[], [], [], [], []], caseTotal = []
 
     const dailyCases = baseArr(), caseRate = baseArr(), casesAvg = baseArrAv(),
@@ -23,7 +23,7 @@ async function cases(url) {
 
     for (let i = 0; i < caseData.length; i++) {
         const temp = new Date(caseData[i].date)
-        if (temp > new Date("2020-08-27")) {
+        if (temp > new Date("2020-08-01")) {
             casesDatesString.push(temp.getDate() + "-" + (temp.getMonth() + 1))
             for (let j = 0; j < caseData[i].newCasesBySpecimenDateAgeDemographics.length; j++) {
                 for (let k = 0; k < ageBrackets.length; k++) {
